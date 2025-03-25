@@ -111,7 +111,7 @@ async function handleSubmit() {
 
     // REST API GET 요청
     try {
-        const response = await fetch('http://localhost:8000/run');
+        const response = await fetch('http://203.237.143.226:8000/run');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
