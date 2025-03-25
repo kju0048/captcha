@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="styles.css"> <!-- 외부 CSS 파일 연결 -->
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+    <script type="module">
+        const firebaseConfig = {
+          apiKey: "AIzaSyCMrLL9Qb-5ZOtrVINuKBEfnh4avMlhNQ0",
+          authDomain: "aifront-a7a19.firebaseapp.com",
+          projectId: "aifront-a7a19",
+          storageBucket: "aifront-a7a19.appspot.com",
+          messagingSenderId: "672591513126",
+          appId: "1:672591513126:web:b007cb3501e972666ac8e7",
+          measurementId: "G-V2K635JELB"
+        };
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>로그인</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">사용자 이름</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="button" onclick="openAuthPopup()">로그인</button>
+        </form>
+        <p>계정이 없으신가요? <a href="#">회원가입</a></p>
+    </div>
+
+    <!-- 팝업 내용 -->
+    <div id="authPopup" class="popup-container">
+        <div class="auth-container">
+            <span class="close-btn" onclick="closeAuthPopup()">&times;</span>
+            <div class="image-section">
+                <div class="image-box" style="position: relative;">
+                    <img id="randomImage1" src="image/loading.jpg" alt="Image 1">
+                    <div class="random-value" id="image1-values"></div>
+                </div>
+                <div class="image-box" style="position: relative;">
+                    <img id="randomImage2" src="image/loading.jpg" alt="Image 2">
+                    <div class="random-value" id="image2-values"></div>
+                </div>
+            </div>
+            <div class="text-section">
+                <div id="colorNumberDisplay" class="color-number-display"></div>
+                <p id="instructionText">두수의 곱을 입력하세요</p>
+            </div>
+            <div class="input-section">
+                <input type="text" placeholder="입력 창" id="inputField" autocomplete="off">
+                <button type="button" onclick="handleSubmit()">입력</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 분리된 JS 파일 연결 -->
+    <script src="colorMapping.js"></script>
+    <script src="imageLoader.js"></script>
+    <script src="instructions.js"></script>
+    <script src="main.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
