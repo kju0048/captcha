@@ -7,9 +7,9 @@ function getColorCode(color) {
     const colorCodes = {
         "yellow": "yellow",
         "green": "green",
-        "green": "green",
-        "green": "green",
-        "green": "green"
+        "red": "red",
+        "purple": "purple",
+        "blue": "blue"
     };
     return colorCodes[color];
 }
