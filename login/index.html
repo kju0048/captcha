@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 외부 CSS 파일 연결 -->
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -28,22 +28,22 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>로그인</h2>
+        <h2>Login</h2>
         <form id="loginForm">
             <div class="input-group">
-                <label for="username">사용자 이름</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="input-group">
-                <label for="password">비밀번호</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="button" onclick="openAuthPopup()">로그인</button>
+            <button type="button" onclick="openAuthPopup()">Login</button>
         </form>
-        <p>계정이 없으신가요? <a href="#">회원가입</a></p>
+        <p>Don't have an account? <a href="#">Sign Up</a></p>
     </div>
 
-    <!-- 팝업 내용 -->
+    <!-- Popup Content -->
     <div id="authPopup" class="popup-container">
         <div class="auth-container">
             <span class="close-btn" onclick="closeAuthPopup()">&times;</span>
@@ -59,16 +59,16 @@
             </div>
             <div class="text-section">
                 <div id="colorNumberDisplay" class="color-number-display"></div>
-                <p id="instructionText">두수의 곱을 입력하세요</p>
+                <p id="instructionText">Please enter the product of the two numbers</p>
             </div>
             <div class="input-section">
-                <input type="text" placeholder="입력 창" id="inputField" autocomplete="off">
-                <button type="button" onclick="handleSubmit()">입력</button>
+                <input type="text" placeholder="Enter here" id="inputField" autocomplete="off">
+                <button type="button" onclick="handleSubmit()">Submit</button>
             </div>
         </div>
     </div>
 
-    <!-- 분리된 JS 파일 연결 -->
+    <!-- Separate JS files -->
     <script src="colorMapping.js"></script>
     <script src="imageLoader.js"></script>
     <script src="instructions.js"></script>
