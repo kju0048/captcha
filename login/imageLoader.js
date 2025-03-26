@@ -1,63 +1,59 @@
 // 랜덤 이미지 불러오기
+// 수정된 loadRandomImages 함수: 좌표 표시가 완료될 때까지 대기합니다.
 async function loadRandomImages() {
     const storageRef = firebase.storage().ref();
-    console.log("참조 생성1 " + storageRef);
 
+    // 첫 번째 이미지 로드 및 좌표 처리
     const folderRef1 = storageRef.child('image1');
-    console.log("folderRef1    "  + folderRef1.fullPath);
-    
     const imageList1 = await folderRef1.listAll();
-    console.log("전체 데이터1: ", imageList1);
     const randomIndex1 = Math.floor(Math.random() * imageList1.items.length);
     const randomImageRef1 = imageList1.items[randomIndex1];
-    console.log("randomImageRef1   " + randomImageRef1);
     const url1 = await randomImageRef1.getDownloadURL();
-    console.log("url1 ======= " + url1);
     imageName1 = randomImageRef1.name;
-
     document.getElementById('randomImage1').src = url1;
-    fetchCoordinates(imageName1, 'image1-values', 'image1');
+    const fetchPromise1 = fetchCoordinates(imageName1, 'image1-values', 'image1');
 
+    // 두 번째 이미지 로드 및 좌표 처리
     const folderRef2 = storageRef.child('image2');
     const imageList2 = await folderRef2.listAll();
     const randomIndex2 = Math.floor(Math.random() * imageList2.items.length);
     const randomImageRef2 = imageList2.items[randomIndex2];
     const url2 = await randomImageRef2.getDownloadURL();
     imageName2 = randomImageRef2.name;
-    console.log("랜덤 이미지 불러오기" + imageName2);
     document.getElementById('randomImage2').src = url2;
-    fetchCoordinates(imageName2, 'image2-values', 'image2');
+    const fetchPromise2 = fetchCoordinates(imageName2, 'image2-values', 'image2');
+
+    // 두 이미지의 좌표 표시가 모두 완료될 때까지 대기
+    await Promise.all([fetchPromise1, fetchPromise2]);
 }
+
+
 function fetchCoordinates(imageId, targetElementId, imageKey) {
-    const dbRef = firebase.database().ref();
+    return firebase.database().ref().once('value')
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const coordinatesObject = snapshot.val();
+                let coordinatesData;
+                // 파일명 -> DB key 변환: .jpg -> _jpg
+                const dbKey = imageId.replace('.jpg', '_jpg');
 
-    dbRef.once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-            const coordinatesObject = snapshot.val();
-            let coordinatesData;
+                if (imageKey === 'image1') {
+                    coordinatesData = coordinatesObject.def?.[dbKey];
+                } else if (imageKey === 'image2') {
+                    coordinatesData = coordinatesObject.gen?.[dbKey];
+                }
 
-            // 파일명 -> DB key 변환: .jpg -> _jpg
-            const dbKey = imageId.replace('.jpg', '_jpg');
-
-            if (imageKey === 'image1') {
-                // def 객체에 접근
-                coordinatesData = coordinatesObject.def?.[dbKey];
-            } else if (imageKey === 'image2') {
-                // gen 객체에 접근
-                coordinatesData = coordinatesObject.gen?.[dbKey];
+                if (coordinatesData) {
+                    displayRandomValues(coordinatesData, targetElementId, imageKey);
+                } else {
+                    console.log(`DB에서 해당 key(${dbKey})에 해당하는 좌표 데이터를 찾지 못했습니다.`);
+                }
             }
-
-            if (coordinatesData) {
-                displayRandomValues(coordinatesData, targetElementId, imageKey);
-            } else {
-                console.log(`DB에서 해당 key(${dbKey})에 해당하는 좌표 데이터를 찾지 못했습니다.`);
-            }
-        }
-    }).catch((error) => {
-        console.error(`Error fetching coordinates: ${error}`);
-    });
+        })
+        .catch((error) => {
+            console.error(`Error fetching coordinates: ${error}`);
+        });
 }
-
 
 // 이미지 및 좌표 이동 함수
 async function moveImageToFolder(imageName, sourceFolder, destinationFolder) {
