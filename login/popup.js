@@ -120,14 +120,15 @@ async function handleSubmit() {
 
     inputField.value = '';
 
-    // 인증 성공 시 survey.html로 이동하여 만족도 조사를 진행함
+    // 인증 성공 시, 캡차 시간 정보를 저장하고 survey.html로 이동
     if (isSuccess) {
-        window.location.href = "survey.html";  // 경로는 실제 파일 위치에 따라 조정 필요
+        localStorage.setItem('captchaTime', timeTaken);
+        window.location.href = "survey.html";  // 경로는 실제 파일 위치에 따라 조정
     }
 
     // REST API GET 요청
     try {
-        const response = await fetch('http://203.237.143.226:8000/run');
+        const response = await fetch('localhost:8000/run');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -136,6 +137,7 @@ async function handleSubmit() {
         console.error('API 요청 중 오류 발생:', error);
     }
 }
+
 
 window.openAuthPopup = openAuthPopup;
 window.closeAuthPopup = closeAuthPopup;

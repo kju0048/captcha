@@ -115,17 +115,22 @@
       const q3 = document.querySelector('input[name="q3"]:checked').value;
       const q4 = document.querySelector('input[name="q4"]:checked').value;
       
+      // localStorage에서 캡차 해결 시간 가져오기
+      const captchaTime = localStorage.getItem('captchaTime') || 'N/A';
+      
       // 설문 모달 숨기기
       document.getElementById('surveyModal').style.display = 'none';
       
-      // 결과 모달에 설문 내용 표시
+      // 결과 모달에 설문 내용과 캡차 시간 표시
       const surveyResultDiv = document.getElementById('surveyResult');
-      surveyResultDiv.innerHTML = '<p>Name: ' + name + '</p>' +
-                                  '<p>Student ID: ' + studentId + '</p>' +
-                                  '<p>1. I want to use this CAPTCHA system frequently: ' + q1 + '</p>' +
-                                  '<p>2. I think this CAPTCHA system is more fun than other CAPTCHA systems: ' + q2 + '</p>' +
-                                  '<p>3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems: ' + q3 + '</p>' +
-                                  '<p>4. I feel that this CAPTCHA system is easy to use: ' + q4 + '</p>';
+      surveyResultDiv.innerHTML = 
+          '<p>Name: ' + name + '</p>' +
+          '<p>Student ID: ' + studentId + '</p>' +
+          '<p>1. I want to use this CAPTCHA system frequently: ' + q1 + '</p>' +
+          '<p>2. I think this CAPTCHA system is more fun than other CAPTCHA systems: ' + q2 + '</p>' +
+          '<p>3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems: ' + q3 + '</p>' +
+          '<p>4. I feel that this CAPTCHA system is easy to use: ' + q4 + '</p>' +
+          '<p>Captcha Solving Time: ' + captchaTime + ' s</p>';
       
       document.getElementById('resultModal').style.display = 'block';
     });
@@ -147,6 +152,8 @@
     // Close 버튼: 결과 모달 닫고 최종 인증 성공 페이지(success.html)로 이동
     document.getElementById('closeResultButton').addEventListener('click', function() {
       document.getElementById('resultModal').style.display = 'none';
+      // 필요시 localStorage에서 captchaTime 삭제
+      localStorage.removeItem('captchaTime');
       window.location.href = '../success/success.html';  // 경로는 실제 파일 위치에 따라 조정
     });
   </script>
