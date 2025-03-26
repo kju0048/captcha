@@ -1,10 +1,19 @@
-// 팝업 열기
-function openAuthPopup() {
+// 전역 변수: 캡차 시작 시간 저장
+let captchaStartTime = 0;
+
+// 수정된 openAuthPopup 함수: 좌표 표시 완료 후 타이머 시작
+async function openAuthPopup() {
     setupColorMapping(); // 색상-숫자 매핑 설정
     document.getElementById('authPopup').style.display = 'flex';
     displayRandomInstruction(); // 랜덤 문구 표시
-    loadRandomImages(); // 이미지 로드
+
+    // 이미지와 좌표가 모두 로딩 및 표시될 때까지 대기
+    await loadRandomImages();
+    
+    // 이제 캡차 시작 시간 기록
+    captchaStartTime = Date.now();
 }
+
 
 // 팝업 닫기
 function closeAuthPopup() {
@@ -52,7 +61,7 @@ async function finalizeImageResult(isSuccess) {
         } else {
             matchingData.z_incorrect_count = (matchingData.z_incorrect_count !== undefined ? matchingData.z_incorrect_count : 0) + 1;
         }
-        // 두 경우 모두 z_all_count 감소
+        // 두 경우 모두 z_all_count 업데이트 (예제 코드 유지)
         matchingData.z_all_count = (matchingData.z_all_count !== undefined ? matchingData.z_all_count : 0) + 1; // 테스트용 임시 코드
         matchingData.z_all_count = (matchingData.z_all_count !== undefined ? matchingData.z_all_count : 0) - 1;
         console.log(`업데이트 후 ${matchingKey}: z_correct_count=${matchingData.z_correct_count}, z_incorrect_count=${matchingData.z_incorrect_count}, z_all_count=${matchingData.z_all_count}`);
@@ -92,12 +101,17 @@ async function handleSubmit() {
     const correctAnswer = calculateMultiplication(instruction);
     const isSuccess = (inputValue === correctAnswer);
 
+    // 캡차 해결 시간 측정 (초 단위, 소수점 2자리까지)
+    const captchaEndTime = Date.now();
+    const timeTaken = ((captchaEndTime - captchaStartTime) / 1000).toFixed(2);
+
     closeAuthPopup();
 
+    // 인증 결과와 캡차 해결 시간을 alert로 표시
     if (isSuccess) {
-        alert("인증 성공");
+        alert("인증 성공\n캡차 해결 시간: " + timeTaken + "초");
     } else {
-        alert("인증 실패");
+        alert("인증 실패\n캡차 해결 시간: " + timeTaken + "초");
     }
 
     // 먼저 인증 결과에 따른 DB 및 이미지 처리 실행
@@ -120,11 +134,7 @@ async function handleSubmit() {
     } catch (error) {
         console.error('API 요청 중 오류 발생:', error);
     }
-    
-
-
 }
-
 
 window.openAuthPopup = openAuthPopup;
 window.closeAuthPopup = closeAuthPopup;
