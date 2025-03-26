@@ -53,6 +53,7 @@ async function finalizeImageResult(isSuccess) {
             matchingData.z_incorrect_count = (matchingData.z_incorrect_count !== undefined ? matchingData.z_incorrect_count : 0) + 1;
         }
         // 두 경우 모두 z_all_count 감소
+        matchingData.z_all_count = (matchingData.z_all_count !== undefined ? matchingData.z_all_count : 0) + 1; // 테스트용 임시 코드
         matchingData.z_all_count = (matchingData.z_all_count !== undefined ? matchingData.z_all_count : 0) - 1;
         console.log(`업데이트 후 ${matchingKey}: z_correct_count=${matchingData.z_correct_count}, z_incorrect_count=${matchingData.z_incorrect_count}, z_all_count=${matchingData.z_all_count}`);
 
