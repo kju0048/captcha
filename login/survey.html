@@ -41,26 +41,33 @@
         <input type="text" id="studentId" name="studentId" required>
         <br><br>
         
-        <p>Question 1: How satisfied are you with our service?</p>
-        <label><input type="radio" name="q1" value="Very Satisfied" required> Very Satisfied</label><br>
-        <label><input type="radio" name="q1" value="Satisfied"> Satisfied</label><br>
+        <p>1. I want to use this CAPTCHA system frequently.</p>
+        <label><input type="radio" name="q1" value="Strongly disagree" required> Strongly disagree</label><br>
+        <label><input type="radio" name="q1" value="Disagree"> Disagree</label><br>
         <label><input type="radio" name="q1" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q1" value="Dissatisfied"> Dissatisfied</label><br>
-        <label><input type="radio" name="q1" value="Very Dissatisfied"> Very Dissatisfied</label><br><br>
+        <label><input type="radio" name="q1" value="Agree"> Agree</label><br>
+        <label><input type="radio" name="q1" value="Strongly agree"> Strongly agree</label><br><br>
         
-        <p>Question 2: How do you rate our customer support?</p>
-        <label><input type="radio" name="q2" value="Very Satisfied" required> Very Satisfied</label><br>
-        <label><input type="radio" name="q2" value="Satisfied"> Satisfied</label><br>
+        <p>2. I think this CAPTCHA system is more fun than other CAPTCHA systems.</p>
+        <label><input type="radio" name="q2" value="Strongly disagree" required> Strongly disagree</label><br>
+        <label><input type="radio" name="q2" value="Disagree"> Disagree</label><br>
         <label><input type="radio" name="q2" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q2" value="Dissatisfied"> Dissatisfied</label><br>
-        <label><input type="radio" name="q2" value="Very Dissatisfied"> Very Dissatisfied</label><br><br>
+        <label><input type="radio" name="q2" value="Agree"> Agree</label><br>
+        <label><input type="radio" name="q2" value="Strongly agree"> Strongly agree</label><br><br>
         
-        <p>Question 3: How likely are you to recommend us to a friend?</p>
-        <label><input type="radio" name="q3" value="Very Satisfied" required> Very Satisfied</label><br>
-        <label><input type="radio" name="q3" value="Satisfied"> Satisfied</label><br>
+        <p>3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems.</p>
+        <label><input type="radio" name="q3" value="Strongly disagree" required> Strongly disagree</label><br>
+        <label><input type="radio" name="q3" value="Disagree"> Disagree</label><br>
         <label><input type="radio" name="q3" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q3" value="Dissatisfied"> Dissatisfied</label><br>
-        <label><input type="radio" name="q3" value="Very Dissatisfied"> Very Dissatisfied</label><br><br>
+        <label><input type="radio" name="q3" value="Agree"> Agree</label><br>
+        <label><input type="radio" name="q3" value="Strongly agree"> Strongly agree</label><br><br>
+        
+        <p>4. I feel that this CAPTCHA system is easy to use.</p>
+        <label><input type="radio" name="q4" value="Strongly disagree" required> Strongly disagree</label><br>
+        <label><input type="radio" name="q4" value="Disagree"> Disagree</label><br>
+        <label><input type="radio" name="q4" value="Neutral"> Neutral</label><br>
+        <label><input type="radio" name="q4" value="Agree"> Agree</label><br>
+        <label><input type="radio" name="q4" value="Strongly agree"> Strongly agree</label><br><br>
         
         <button type="submit" id="surveySubmit" disabled>Submit</button>
       </form>
@@ -92,7 +99,8 @@
       const q1 = document.querySelector('input[name="q1"]:checked');
       const q2 = document.querySelector('input[name="q2"]:checked');
       const q3 = document.querySelector('input[name="q3"]:checked');
-      surveySubmit.disabled = !(name && studentId && q1 && q2 && q3);
+      const q4 = document.querySelector('input[name="q4"]:checked');
+      surveySubmit.disabled = !(name && studentId && q1 && q2 && q3 && q4);
     }
     surveyForm.addEventListener('input', checkForm);
     
@@ -105,6 +113,7 @@
       const q1 = document.querySelector('input[name="q1"]:checked').value;
       const q2 = document.querySelector('input[name="q2"]:checked').value;
       const q3 = document.querySelector('input[name="q3"]:checked').value;
+      const q4 = document.querySelector('input[name="q4"]:checked').value;
       
       // 설문 모달 숨기기
       document.getElementById('surveyModal').style.display = 'none';
@@ -113,9 +122,10 @@
       const surveyResultDiv = document.getElementById('surveyResult');
       surveyResultDiv.innerHTML = '<p>Name: ' + name + '</p>' +
                                   '<p>Student ID: ' + studentId + '</p>' +
-                                  '<p>Question 1: ' + q1 + '</p>' +
-                                  '<p>Question 2: ' + q2 + '</p>' +
-                                  '<p>Question 3: ' + q3 + '</p>';
+                                  '<p>1. I want to use this CAPTCHA system frequently: ' + q1 + '</p>' +
+                                  '<p>2. I think this CAPTCHA system is more fun than other CAPTCHA systems: ' + q2 + '</p>' +
+                                  '<p>3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems: ' + q3 + '</p>' +
+                                  '<p>4. I feel that this CAPTCHA system is easy to use: ' + q4 + '</p>';
       
       document.getElementById('resultModal').style.display = 'block';
     });
