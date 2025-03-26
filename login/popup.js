@@ -1,3 +1,5 @@
+// popup.js
+
 // 전역 변수: 캡차 시작 시간 저장
 let captchaStartTime = 0;
 
@@ -13,7 +15,6 @@ async function openAuthPopup() {
     // 이제 캡차 시작 시간 기록
     captchaStartTime = Date.now();
 }
-
 
 // 팝업 닫기
 function closeAuthPopup() {
@@ -109,9 +110,9 @@ async function handleSubmit() {
 
     // 인증 결과와 캡차 해결 시간을 alert로 표시
     if (isSuccess) {
-        alert("인증 성공\n캡차 해결 시간: " + timeTaken + "초");
+        alert("Success\nTime: " + timeTaken + "s");
     } else {
-        alert("인증 실패\n캡차 해결 시간: " + timeTaken + "초");
+        alert("Fail\nTime: " + timeTaken + "s");
     }
 
     // 먼저 인증 결과에 따른 DB 및 이미지 처리 실행
@@ -119,9 +120,9 @@ async function handleSubmit() {
 
     inputField.value = '';
 
-    // 최종 처리 후, 인증 성공 시 페이지 이동
+    // 인증 성공 시 survey.html로 이동하여 만족도 조사를 진행함
     if (isSuccess) {
-        window.location.href = "../success/success.html";
+        window.location.href = "survey.html";  // 경로는 실제 파일 위치에 따라 조정 필요
     }
 
     // REST API GET 요청

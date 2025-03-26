@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satisfaction Survey</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 기본 모달 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Survey Modal (페이지 로드 시 바로 표시) -->
+  <div id="surveyModal" class="modal" style="display: block;">
+    <div class="modal-content">
+      <h2>Satisfaction Survey</h2>
+      <form id="surveyForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" name="studentId" required>
+        <br><br>
+        
+        <p>Question 1: How satisfied are you with our service?</p>
+        <label><input type="radio" name="q1" value="Very Satisfied" required> Very Satisfied</label><br>
+        <label><input type="radio" name="q1" value="Satisfied"> Satisfied</label><br>
+        <label><input type="radio" name="q1" value="Neutral"> Neutral</label><br>
+        <label><input type="radio" name="q1" value="Dissatisfied"> Dissatisfied</label><br>
+        <label><input type="radio" name="q1" value="Very Dissatisfied"> Very Dissatisfied</label><br><br>
+        
+        <p>Question 2: How do you rate our customer support?</p>
+        <label><input type="radio" name="q2" value="Very Satisfied" required> Very Satisfied</label><br>
+        <label><input type="radio" name="q2" value="Satisfied"> Satisfied</label><br>
+        <label><input type="radio" name="q2" value="Neutral"> Neutral</label><br>
+        <label><input type="radio" name="q2" value="Dissatisfied"> Dissatisfied</label><br>
+        <label><input type="radio" name="q2" value="Very Dissatisfied"> Very Dissatisfied</label><br><br>
+        
+        <p>Question 3: How likely are you to recommend us to a friend?</p>
+        <label><input type="radio" name="q3" value="Very Satisfied" required> Very Satisfied</label><br>
+        <label><input type="radio" name="q3" value="Satisfied"> Satisfied</label><br>
+        <label><input type="radio" name="q3" value="Neutral"> Neutral</label><br>
+        <label><input type="radio" name="q3" value="Dissatisfied"> Dissatisfied</label><br>
+        <label><input type="radio" name="q3" value="Very Dissatisfied"> Very Dissatisfied</label><br><br>
+        
+        <button type="submit" id="surveySubmit" disabled>Submit</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Result Modal -->
+  <div id="resultModal" class="modal">
+    <div class="modal-content" id="resultContent">
+      <h2>Survey Result</h2>
+      <div id="surveyResult"></div>
+      <br>
+      <button id="saveImageButton">Save Image</button>
+      <button id="closeResultButton">Close</button>
+    </div>
+  </div>
+  
+  <!-- html2canvas 라이브러리 (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // 폼 요소 및 모달 가져오기
+    const surveyForm = document.getElementById('surveyForm');
+    const surveySubmit = document.getElementById('surveySubmit');
+
+    // 모든 필드 입력 여부 확인 함수
+    function checkForm() {
+      const name = document.getElementById('name').value.trim();
+      const studentId = document.getElementById('studentId').value.trim();
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      surveySubmit.disabled = !(name && studentId && q1 && q2 && q3);
+    }
+    surveyForm.addEventListener('input', checkForm);
+    
+    // 설문 제출 처리
+    surveyForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // 입력된 데이터 수집
+      const name = document.getElementById('name').value.trim();
+      const studentId = document.getElementById('studentId').value.trim();
+      const q1 = document.querySelector('input[name="q1"]:checked').value;
+      const q2 = document.querySelector('input[name="q2"]:checked').value;
+      const q3 = document.querySelector('input[name="q3"]:checked').value;
+      
+      // 설문 모달 숨기기
+      document.getElementById('surveyModal').style.display = 'none';
+      
+      // 결과 모달에 설문 내용 표시
+      const surveyResultDiv = document.getElementById('surveyResult');
+      surveyResultDiv.innerHTML = '<p>Name: ' + name + '</p>' +
+                                  '<p>Student ID: ' + studentId + '</p>' +
+                                  '<p>Question 1: ' + q1 + '</p>' +
+                                  '<p>Question 2: ' + q2 + '</p>' +
+                                  '<p>Question 3: ' + q3 + '</p>';
+      
+      document.getElementById('resultModal').style.display = 'block';
+    });
+    
+    // Save Image 버튼: html2canvas로 결과 화면 캡쳐 후 다운로드
+    document.getElementById('saveImageButton').addEventListener('click', function() {
+      const name = document.getElementById('name').value.trim();
+      const studentId = document.getElementById('studentId').value.trim();
+      const fileName = name + '_' + studentId + '.jpg';
+      
+      html2canvas(document.getElementById('resultContent')).then(canvas => {
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = canvas.toDataURL('image/jpeg');
+        link.click();
+      });
+    });
+    
+    // Close 버튼: 결과 모달 닫고 최종 인증 성공 페이지(success.html)로 이동
+    document.getElementById('closeResultButton').addEventListener('click', function() {
+      document.getElementById('resultModal').style.display = 'none';
+      window.location.href = '../success/success.html';  // 경로는 실제 파일 위치에 따라 조정
+    });
+  </script>
+</body>
+</html>
