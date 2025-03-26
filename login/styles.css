@@ -126,6 +126,7 @@ a {
 }
 
 .color-number-display span {
+    white-space: nowrap;    /* 텍스트 줄바꿈 방지 */
     font-size: 14px;
     font-weight: bold;
     margin: 0 5px;
