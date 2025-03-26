@@ -1,15 +1,15 @@
 // 색상 배열 및 색상-숫자 매핑
-const colors = ["노랑", "초록", "빨강", "보라", "파랑"];
+const colors = ["yellow", "green", "red", "purple", "blue"];
 const colorMapping = {}; // 색상-숫자 매핑 객체
 
 // 색상 이름에 따른 실제 색상 코드 반환
 function getColorCode(color) {
     const colorCodes = {
-        "노랑": "yellow",
-        "초록": "green",
-        "빨강": "red",
-        "보라": "purple",
-        "파랑": "blue"
+        "yellow": "yellow",
+        "green": "green",
+        "green": "green",
+        "green": "green",
+        "green": "green"
     };
     return colorCodes[color];
 }
