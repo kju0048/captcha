@@ -126,16 +126,16 @@ async function handleSubmit() {
         window.location.href = "survey.html";  // 경로는 실제 파일 위치에 따라 조정
     }
 
-    // REST API GET 요청
-    try {
-        const response = await fetch('localhost:8000/run');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        console.log('API 호출 완료');
-    } catch (error) {
-        console.error('API 요청 중 오류 발생:', error);
-    }
+    // // REST API GET 요청
+    // try {
+    //     const response = await fetch('localhost:8000/run');
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! status: ${response.status}`);
+    //     }
+    //     console.log('API 호출 완료');
+    // } catch (error) {
+    //     console.error('API 요청 중 오류 발생:', error);
+    // }
 }
 
 

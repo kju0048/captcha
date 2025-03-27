@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Satisfaction Survey</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     /* 기본 모달 스타일 */
     .modal {
@@ -32,42 +31,45 @@
   <!-- Survey Modal (페이지 로드 시 바로 표시) -->
   <div id="surveyModal" class="modal" style="display: block;">
     <div class="modal-content">
-      <h2>Satisfaction Survey</h2>
+      <!-- 언어 전환 버튼을 모달 내부로 이동 -->
+      <button id="languageToggleBtn" style="margin: 20px;">한국어 ↔ English</button>
+
+      <h2 id="surveyTitle">Satisfaction Survey</h2>
       <form id="surveyForm">
-        <label for="name">Name:</label>
+        <label for="name" id="nameLabel">Name:</label>
         <input type="text" id="name" name="name" required>
         <br><br>
-        <label for="studentId">Student ID:</label>
+        <label for="studentId" id="studentIdLabel">Student ID:</label>
         <input type="text" id="studentId" name="studentId" required>
         <br><br>
         
-        <p>1. I want to use this CAPTCHA system frequently.</p>
-        <label><input type="radio" name="q1" value="Strongly disagree" required> Strongly disagree</label><br>
-        <label><input type="radio" name="q1" value="Disagree"> Disagree</label><br>
-        <label><input type="radio" name="q1" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q1" value="Agree"> Agree</label><br>
-        <label><input type="radio" name="q1" value="Strongly agree"> Strongly agree</label><br><br>
+        <p id="q1Text">1. I want to use this CAPTCHA system frequently.</p>
+        <label><input type="radio" name="q1" value="Strongly disagree" required id="q1StronglyDisagree"> <span id="q1StronglyDisagreeLabel">Strongly disagree</span></label><br>
+        <label><input type="radio" name="q1" value="Disagree" id="q1Disagree"> <span id="q1DisagreeLabel">Disagree</span></label><br>
+        <label><input type="radio" name="q1" value="Neutral" id="q1Neutral"> <span id="q1NeutralLabel">Neutral</span></label><br>
+        <label><input type="radio" name="q1" value="Agree" id="q1Agree"> <span id="q1AgreeLabel">Agree</span></label><br>
+        <label><input type="radio" name="q1" value="Strongly agree" id="q1StronglyAgree"> <span id="q1StronglyAgreeLabel">Strongly agree</span></label><br><br>
         
-        <p>2. I think this CAPTCHA system is more fun than other CAPTCHA systems.</p>
-        <label><input type="radio" name="q2" value="Strongly disagree" required> Strongly disagree</label><br>
-        <label><input type="radio" name="q2" value="Disagree"> Disagree</label><br>
-        <label><input type="radio" name="q2" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q2" value="Agree"> Agree</label><br>
-        <label><input type="radio" name="q2" value="Strongly agree"> Strongly agree</label><br><br>
+        <p id="q2Text">2. I think this CAPTCHA system is more fun than other CAPTCHA systems.</p>
+        <label><input type="radio" name="q2" value="Strongly disagree" required id="q2StronglyDisagree"> <span id="q2StronglyDisagreeLabel">Strongly disagree</span></label><br>
+        <label><input type="radio" name="q2" value="Disagree" id="q2Disagree"> <span id="q2DisagreeLabel">Disagree</span></label><br>
+        <label><input type="radio" name="q2" value="Neutral" id="q2Neutral"> <span id="q2NeutralLabel">Neutral</span></label><br>
+        <label><input type="radio" name="q2" value="Agree" id="q2Agree"> <span id="q2AgreeLabel">Agree</span></label><br>
+        <label><input type="radio" name="q2" value="Strongly agree" id="q2StronglyAgree"> <span id="q2StronglyAgreeLabel">Strongly agree</span></label><br><br>
         
-        <p>3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems.</p>
-        <label><input type="radio" name="q3" value="Strongly disagree" required> Strongly disagree</label><br>
-        <label><input type="radio" name="q3" value="Disagree"> Disagree</label><br>
-        <label><input type="radio" name="q3" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q3" value="Agree"> Agree</label><br>
-        <label><input type="radio" name="q3" value="Strongly agree"> Strongly agree</label><br><br>
+        <p id="q3Text">3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems.</p>
+        <label><input type="radio" name="q3" value="Strongly disagree" required id="q3StronglyDisagree"> <span id="q3StronglyDisagreeLabel">Strongly disagree</span></label><br>
+        <label><input type="radio" name="q3" value="Disagree" id="q3Disagree"> <span id="q3DisagreeLabel">Disagree</span></label><br>
+        <label><input type="radio" name="q3" value="Neutral" id="q3Neutral"> <span id="q3NeutralLabel">Neutral</span></label><br>
+        <label><input type="radio" name="q3" value="Agree" id="q3Agree"> <span id="q3AgreeLabel">Agree</span></label><br>
+        <label><input type="radio" name="q3" value="Strongly agree" id="q3StronglyAgree"> <span id="q3StronglyAgreeLabel">Strongly agree</span></label><br><br>
         
-        <p>4. I feel that this CAPTCHA system is easy to use.</p>
-        <label><input type="radio" name="q4" value="Strongly disagree" required> Strongly disagree</label><br>
-        <label><input type="radio" name="q4" value="Disagree"> Disagree</label><br>
-        <label><input type="radio" name="q4" value="Neutral"> Neutral</label><br>
-        <label><input type="radio" name="q4" value="Agree"> Agree</label><br>
-        <label><input type="radio" name="q4" value="Strongly agree"> Strongly agree</label><br><br>
+        <p id="q4Text">4. I feel that this CAPTCHA system is easy to use.</p>
+        <label><input type="radio" name="q4" value="Strongly disagree" required id="q4StronglyDisagree"> <span id="q4StronglyDisagreeLabel">Strongly disagree</span></label><br>
+        <label><input type="radio" name="q4" value="Disagree" id="q4Disagree"> <span id="q4DisagreeLabel">Disagree</span></label><br>
+        <label><input type="radio" name="q4" value="Neutral" id="q4Neutral"> <span id="q4NeutralLabel">Neutral</span></label><br>
+        <label><input type="radio" name="q4" value="Agree" id="q4Agree"> <span id="q4AgreeLabel">Agree</span></label><br>
+        <label><input type="radio" name="q4" value="Strongly agree" id="q4StronglyAgree"> <span id="q4StronglyAgreeLabel">Strongly agree</span></label><br><br>
         
         <button type="submit" id="surveySubmit" disabled>Submit</button>
       </form>
@@ -77,10 +79,10 @@
   <!-- Result Modal -->
   <div id="resultModal" class="modal">
     <div class="modal-content" id="resultContent">
-      <h2>Survey Result</h2>
+      <h2 id="resultTitle">Survey Result</h2>
       <div id="surveyResult"></div>
       <br>
-      <button id="saveImageButton">Save Image</button>
+      <!-- 'Save Image' 버튼 제거하고 닫기 시 자동 저장 -->
       <button id="closeResultButton">Close</button>
     </div>
   </div>
@@ -88,7 +90,123 @@
   <!-- html2canvas 라이브러리 (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    // 폼 요소 및 모달 가져오기
+    // ---------------------------
+    // 언어별 텍스트 정의(영어/한국어)
+    // ---------------------------
+    const translations = {
+      en: {
+        surveyTitle: "Satisfaction Survey",
+        nameLabel: "Name:",
+        studentIdLabel: "Student ID:",
+        q1Text: "1. I want to use this CAPTCHA system frequently.",
+        q2Text: "2. I think this CAPTCHA system is more fun than other CAPTCHA systems.",
+        q3Text: "3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems.",
+        q4Text: "4. I feel that this CAPTCHA system is easy to use.",
+        stronglyDisagree: "Strongly disagree",
+        disagree: "Disagree",
+        neutral: "Neutral",
+        agree: "Agree",
+        stronglyAgree: "Strongly agree",
+        submitBtn: "Submit",
+        surveyResultTitle: "Survey Result",
+        saveImageButton: "Save Image",
+        closeResultButton: "Close",
+        resultName: "Name: ",
+        resultId: "Student ID: ",
+        resultQ1: "1. I want to use this CAPTCHA system frequently: ",
+        resultQ2: "2. I think this CAPTCHA system is more fun than other CAPTCHA systems: ",
+        resultQ3: "3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems: ",
+        resultQ4: "4. I feel that this CAPTCHA system is easy to use: ",
+        captchaSolvingTime: "Captcha Solving Time: ",
+        na: "N/A",
+      },
+      ko: {
+        surveyTitle: "만족도 조사",
+        nameLabel: "이름:",
+        studentIdLabel: "학번:",
+        q1Text: "1. 본 CAPTCHA 시스템을 자주 사용하고 싶습니다.",
+        q2Text: "2. 본 CAPTCHA 시스템이 다른 CAPTCHA 시스템보다 재미있다고 생각합니다.",
+        q3Text: "3. 본 CAPTCHA 시스템이 다른 CAPTCHA 시스템보다 훨씬 빠르다고 생각합니다.",
+        q4Text: "4. 본 CAPTCHA 시스템이 사용하기 쉽다고 느낍니다.",
+        stronglyDisagree: "전혀 동의하지 않음",
+        disagree: "동의하지 않음",
+        neutral: "중립",
+        agree: "동의함",
+        stronglyAgree: "매우 동의함",
+        submitBtn: "제출",
+        surveyResultTitle: "설문 결과",
+        saveImageButton: "이미지 저장",
+        closeResultButton: "닫기",
+        resultName: "이름: ",
+        resultId: "학번: ",
+        resultQ1: "1. 본 CAPTCHA 시스템을 자주 사용하고 싶습니다: ",
+        resultQ2: "2. 본 CAPTCHA 시스템이 다른 CAPTCHA 시스템보다 재미있다고 생각합니다: ",
+        resultQ3: "3. 본 CAPTCHA 시스템이 다른 CAPTCHA 시스템보다 훨씬 빠르다고 생각합니다: ",
+        resultQ4: "4. 본 CAPTCHA 시스템이 사용하기 쉽다고 느낍니다: ",
+        captchaSolvingTime: "캡차 해결 시간: ",
+        na: "없음",
+      }
+    };
+
+    // 현재 언어 상태(기본 영어)
+    let currentLang = 'en';
+
+    // 언어 변경을 적용하는 함수
+    function applyTranslations() {
+      const t = translations[currentLang];
+      document.getElementById('surveyTitle').textContent = t.surveyTitle;
+      document.getElementById('nameLabel').textContent = t.nameLabel;
+      document.getElementById('studentIdLabel').textContent = t.studentIdLabel;
+      
+      document.getElementById('q1Text').textContent = t.q1Text;
+      document.getElementById('q1StronglyDisagreeLabel').textContent = t.stronglyDisagree;
+      document.getElementById('q1DisagreeLabel').textContent = t.disagree;
+      document.getElementById('q1NeutralLabel').textContent = t.neutral;
+      document.getElementById('q1AgreeLabel').textContent = t.agree;
+      document.getElementById('q1StronglyAgreeLabel').textContent = t.stronglyAgree;
+      
+      document.getElementById('q2Text').textContent = t.q2Text;
+      document.getElementById('q2StronglyDisagreeLabel').textContent = t.stronglyDisagree;
+      document.getElementById('q2DisagreeLabel').textContent = t.disagree;
+      document.getElementById('q2NeutralLabel').textContent = t.neutral;
+      document.getElementById('q2AgreeLabel').textContent = t.agree;
+      document.getElementById('q2StronglyAgreeLabel').textContent = t.stronglyAgree;
+      
+      document.getElementById('q3Text').textContent = t.q3Text;
+      document.getElementById('q3StronglyDisagreeLabel').textContent = t.stronglyDisagree;
+      document.getElementById('q3DisagreeLabel').textContent = t.disagree;
+      document.getElementById('q3NeutralLabel').textContent = t.neutral;
+      document.getElementById('q3AgreeLabel').textContent = t.agree;
+      document.getElementById('q3StronglyAgreeLabel').textContent = t.stronglyAgree;
+      
+      document.getElementById('q4Text').textContent = t.q4Text;
+      document.getElementById('q4StronglyDisagreeLabel').textContent = t.stronglyDisagree;
+      document.getElementById('q4DisagreeLabel').textContent = t.disagree;
+      document.getElementById('q4NeutralLabel').textContent = t.neutral;
+      document.getElementById('q4AgreeLabel').textContent = t.agree;
+      document.getElementById('q4StronglyAgreeLabel').textContent = t.stronglyAgree;
+      
+      document.getElementById('surveySubmit').textContent = t.submitBtn;
+      
+      // 결과 모달
+      document.getElementById('resultTitle').textContent = t.surveyResultTitle;
+      document.getElementById('closeResultButton').textContent = t.closeResultButton;
+    }
+
+    // 페이지 로드 시 초기 번역 적용
+    window.addEventListener('load', () => {
+      applyTranslations();
+    });
+
+    // 언어 전환 버튼 클릭 시
+    document.getElementById('languageToggleBtn').addEventListener('click', () => {
+      currentLang = (currentLang === 'en') ? 'ko' : 'en';
+      applyTranslations();
+    });
+
+    // ---------------------------
+    // 설문 폼 로직
+    // ---------------------------
     const surveyForm = document.getElementById('surveyForm');
     const surveySubmit = document.getElementById('surveySubmit');
 
@@ -116,45 +234,47 @@
       const q4 = document.querySelector('input[name="q4"]:checked').value;
       
       // localStorage에서 캡차 해결 시간 가져오기
-      const captchaTime = localStorage.getItem('captchaTime') || 'N/A';
+      const captchaTime = localStorage.getItem('captchaTime') || translations[currentLang].na;
       
       // 설문 모달 숨기기
       document.getElementById('surveyModal').style.display = 'none';
       
+      // 설문 결과는 무조건 영어로 표시
+      const t = translations['en'];  // <--- 강제로 영어 사용
+
       // 결과 모달에 설문 내용과 캡차 시간 표시
       const surveyResultDiv = document.getElementById('surveyResult');
       surveyResultDiv.innerHTML = 
-          '<p>Name: ' + name + '</p>' +
-          '<p>Student ID: ' + studentId + '</p>' +
-          '<p>1. I want to use this CAPTCHA system frequently: ' + q1 + '</p>' +
-          '<p>2. I think this CAPTCHA system is more fun than other CAPTCHA systems: ' + q2 + '</p>' +
-          '<p>3. I feel that this CAPTCHA system is much faster than other CAPTCHA systems: ' + q3 + '</p>' +
-          '<p>4. I feel that this CAPTCHA system is easy to use: ' + q4 + '</p>' +
-          '<p>Captcha Solving Time: ' + captchaTime + ' s</p>';
+          '<p>' + t.resultName + name + '</p>' +
+          '<p>' + t.resultId + studentId + '</p>' +
+          '<p>' + t.resultQ1 + q1 + '</p>' +
+          '<p>' + t.resultQ2 + q2 + '</p>' +
+          '<p>' + t.resultQ3 + q3 + '</p>' +
+          '<p>' + t.resultQ4 + q4 + '</p>' +
+          '<p>' + t.captchaSolvingTime + captchaTime + ' s</p>';
       
       document.getElementById('resultModal').style.display = 'block';
     });
     
-    // Save Image 버튼: html2canvas로 결과 화면 캡쳐 후 다운로드
-    document.getElementById('saveImageButton').addEventListener('click', function() {
+    // Close 버튼: 결과 모달 닫기 전 이미지 저장 후 success.html로 이동
+    document.getElementById('closeResultButton').addEventListener('click', function() {
       const name = document.getElementById('name').value.trim();
       const studentId = document.getElementById('studentId').value.trim();
       const fileName = name + '_' + studentId + '.jpg';
-      
+
+      // html2canvas로 이미지 캡처
       html2canvas(document.getElementById('resultContent')).then(canvas => {
+        // 다운로드 링크 생성 후 자동 클릭
         const link = document.createElement('a');
         link.download = fileName;
         link.href = canvas.toDataURL('image/jpeg');
         link.click();
+
+        // 필요시 localStorage에서 captchaTime 삭제
+        localStorage.removeItem('captchaTime');
+        // 최종 인증 성공 페이지로 이동
+        window.location.href = '../success/success.html';
       });
-    });
-    
-    // Close 버튼: 결과 모달 닫고 최종 인증 성공 페이지(success.html)로 이동
-    document.getElementById('closeResultButton').addEventListener('click', function() {
-      document.getElementById('resultModal').style.display = 'none';
-      // 필요시 localStorage에서 captchaTime 삭제
-      localStorage.removeItem('captchaTime');
-      window.location.href = '../success/success.html';  // 경로는 실제 파일 위치에 따라 조정
     });
   </script>
 </body>
