@@ -1,19 +1,19 @@
 // 텍스트 문구 배열 생성 (영어로 변환)
 const instructions = [
-    "Enter the product of the values corresponding to the left eye of the two portraits.",
-    "Enter the product of the values corresponding to the right eye of the two portraits.",
-    "Enter the product of the values corresponding to the nose of the two portraits.",
-    "Enter the product of the values corresponding to the left corner of the mouth of the two portraits.",
-    "Enter the product of the values corresponding to the right corner of the mouth of the two portraits."
-  ];
-  
-  const coordinateKeys = {
-    "Enter the product of the values corresponding to the left eye of the two portraits.": "lefteye",
-    "Enter the product of the values corresponding to the right eye of the two portraits.": "righteye",
-    "Enter the product of the values corresponding to the nose of the two portraits.": "nose",
-    "Enter the product of the values corresponding to the left corner of the mouth of the two portraits.": "leftmouth",
-    "Enter the product of the values corresponding to the right corner of the mouth of the two portraits.": "rightmouth"
-  };
+  "두 이미지의 왼쪽 눈의 곱을 구하시오",
+  "두 이미지의 오른쪽 눈의 곱을 구하시오",
+  "두 이미지의 코의 곱을 구하시오",
+  "두 이미지의 왼쪽 입꼬리의 곱을 구하시오",
+  "두 이미지의 오른쪽 입꼬리의 곱을 구하시오"
+];
+
+const coordinateKeys = {
+  "두 이미지의 왼쪽 눈의 곱을 구하시오": "lefteye",
+  "두 이미지의 오른쪽 눈의 곱을 구하시오": "righteye",
+  "두 이미지의 코의 곱을 구하시오": "nose",
+  "두 이미지의 왼쪽 입꼬리의 곱을 구하시오": "leftmouth",
+  "두 이미지의 오른쪽 입꼬리의 곱을 구하시오": "rightmouth"
+};
 
 // 랜덤 문구 표시 함수
 function displayRandomInstruction() {
