@@ -1,19 +1,19 @@
 // 텍스트 문구 배열 생성 (영어로 변환)
 const instructions = [
-    "Compute the product of the left eyes of both images",
-    "Compute the product of the right eyes of both images",
-    "Compute the product of the noses of both images",
-    "Compute the product of the left corners of the mouth of both images",
-    "Compute the product of the right corners of the mouth of both images"
-];
-
-const coordinateKeys = {
-    "Compute the product of the left eyes of both images": "lefteye",
-    "Compute the product of the right eyes of both images": "righteye",
-    "Compute the product of the noses of both images": "nose",
-    "Compute the product of the left corners of the mouth of both images": "leftmouth",
-    "Compute the product of the right corners of the mouth of both images": "rightmouth"
-};
+    "Enter the product of the values corresponding to the left eye of the two portraits.",
+    "Enter the product of the values corresponding to the right eye of the two portraits.",
+    "Enter the product of the values corresponding to the nose of the two portraits.",
+    "Enter the product of the values corresponding to the left corner of the mouth of the two portraits.",
+    "Enter the product of the values corresponding to the right corner of the mouth of the two portraits."
+  ];
+  
+  const coordinateKeys = {
+    "Enter the product of the values corresponding to the left eye of the two portraits.": "lefteye",
+    "Enter the product of the values corresponding to the right eye of the two portraits.": "righteye",
+    "Enter the product of the values corresponding to the nose of the two portraits.": "nose",
+    "Enter the product of the values corresponding to the left corner of the mouth of the two portraits.": "leftmouth",
+    "Enter the product of the values corresponding to the right corner of the mouth of the two portraits.": "rightmouth"
+  };
 
 // 랜덤 문구 표시 함수
 function displayRandomInstruction() {
